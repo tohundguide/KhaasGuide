@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, Globe, ChevronDown, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
+import { Menu, X, ChevronDown, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
 import { Button } from './UI';
 
 type DropdownType = 'businessSetup' | 'services' | null;
@@ -278,12 +278,7 @@ export const Navbar: React.FC = () => {
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <div className={`p-2 rounded-lg ${isScrolled ? 'bg-corporate-900 text-white' : 'bg-white text-corporate-900 shadow-lg'}`}>
-              <Globe className="w-6 h-6" />
-            </div>
-            <span className={`text-2xl font-serif font-bold tracking-tight ${isScrolled ? 'text-corporate-900' : 'text-white'}`}>
-              Khaas<span className="text-gold-500"> Guide</span>
-            </span>
+            <img src="/logo.png" alt="Khaas Guide" className="h-12 w-auto object-contain" />
           </Link>
 
           {/* Desktop Nav */}
@@ -506,10 +501,7 @@ export const Footer: React.FC = () => {
           {/* Brand */}
           <div className="space-y-6">
             <Link to="/" className="flex items-center gap-2">
-              <div className="bg-white text-corporate-900 p-2 rounded-lg">
-                <Globe className="w-6 h-6" />
-              </div>
-              <span className="text-2xl font-serif font-bold">Khaas<span className="text-gold-500"> Guide</span></span>
+              <img src="/logo.png" alt="Khaas Guide" className="h-14 w-auto object-contain bg-white/10 rounded-lg p-1" />
             </Link>
             <p className="text-corporate-100 leading-relaxed text-sm">
               Helping entrepreneurs and global companies establish their presence in the UAE since 2010. Your trusted partner for seamless business setup.
