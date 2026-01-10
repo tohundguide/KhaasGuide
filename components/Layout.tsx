@@ -282,7 +282,7 @@ export const Navbar: React.FC = () => {
               <Globe className="w-6 h-6" />
             </div>
             <span className={`text-2xl font-serif font-bold tracking-tight ${isScrolled ? 'text-corporate-900' : 'text-white'}`}>
-              Tohund<span className="text-gold-500"> Guide</span>
+              Khaas<span className="text-gold-500"> Guide</span>
             </span>
           </Link>
 
@@ -509,7 +509,7 @@ export const Footer: React.FC = () => {
               <div className="bg-white text-corporate-900 p-2 rounded-lg">
                 <Globe className="w-6 h-6" />
               </div>
-              <span className="text-2xl font-serif font-bold">Tohund<span className="text-gold-500"> Guide</span></span>
+              <span className="text-2xl font-serif font-bold">Khaas<span className="text-gold-500"> Guide</span></span>
             </Link>
             <p className="text-corporate-100 leading-relaxed text-sm">
               Helping entrepreneurs and global companies establish their presence in the UAE since 2010. Your trusted partner for seamless business setup.
@@ -547,7 +547,7 @@ export const Footer: React.FC = () => {
               </li>
               <li className="flex gap-3">
                 <span className="font-semibold text-white">Email:</span> 
-                setup@tohundguide.com
+                setup@khaasguide.com
               </li>
             </ul>
           </div>
@@ -570,7 +570,7 @@ export const Footer: React.FC = () => {
         </div>
 
         <div className="border-t border-corporate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-corporate-300">
-          <p>© 2024 Tohund Guide Consultancy. All rights reserved.</p>
+          <p>© 2024 Khaas Guide Consultancy. All rights reserved.</p>
           <div className="flex gap-6">
             <a href="#" className="hover:text-white">Privacy Policy</a>
             <a href="#" className="hover:text-white">Terms of Service</a>

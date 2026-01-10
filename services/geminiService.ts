@@ -2,7 +2,7 @@ import { GoogleGenAI, Chat, GenerateContentResponse } from "@google/genai";
 import { ChatMessage } from "../types";
 
 const SYSTEM_INSTRUCTION = `
-You are "Tohund Guide AI", a senior business consultant specializing in company formation in the UAE (Dubai, Abu Dhabi, Sharjah, etc.). 
+You are "Khaas Guide AI", a senior business consultant specializing in company formation in the UAE (Dubai, Abu Dhabi, Sharjah, etc.). 
 Your tone is professional, encouraging, and authoritative yet accessible.
 
 Your Knowledge Base:

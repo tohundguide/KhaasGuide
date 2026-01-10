@@ -34,8 +34,8 @@ export const Contact: React.FC = () => {
     {
       icon: Mail,
       title: 'Email',
-      details: ['info@tohundguide.com', 'support@tohundguide.com'],
-      action: 'mailto:info@tohundguide.com',
+      details: ['info@khaasguide.com', 'support@khaasguide.com'],
+      action: 'mailto:info@khaasguide.com',
     },
     {
       icon: MapPin,

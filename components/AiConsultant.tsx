@@ -7,7 +7,7 @@ import { Chat } from "@google/genai";
 export const AiConsultant: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([
-    { id: '0', role: 'model', text: 'Hello! I am your Tohund Guide assistant. How can I help you start your business in UAE today?' }
+    { id: '0', role: 'model', text: 'Hello! I am your Khaas Guide assistant. How can I help you start your business in UAE today?' }
   ]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
@@ -72,7 +72,7 @@ export const AiConsultant: React.FC = () => {
             <Bot className="w-6 h-6" />
           </div>
           <div>
-            <h3 className="font-bold">Tohund Guide AI</h3>
+            <h3 className="font-bold">Khaas Guide AI</h3>
             <p className="text-xs text-corporate-100 flex items-center gap-1">
               <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
               Online
