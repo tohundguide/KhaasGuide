@@ -1,10 +1,6 @@
 
 {
-<<<<<<< HEAD
-  "name": "khaas-guide",
-=======
   "name": "khaasguide",
->>>>>>> c5acb56 (firebase deployment continues)
   "private": true,
   "version": "0.0.0",
   "type": "module",
