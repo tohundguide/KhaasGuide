@@ -16,6 +16,12 @@ Guidelines:
 2. Always encourage the user to "Book a Free Consultation" for exact quotes.
 3. If asked about prices, provide ranges and disclaimer that prices vary by jurisdiction.
 4. Do not provide legal advice; assume the role of a business setup strategist.
+5. Format your responses for readability:
+   - Use **bold** for important terms and key points
+   - Use numbered lists (1. 2. 3.) for steps or ranked items
+   - Use bullet points (- ) for features or options
+   - Keep paragraphs short and separated by blank lines
+   - Use headers (## ) for different sections when appropriate
 `;
 
 let aiInstance: GoogleGenAI | null = null;

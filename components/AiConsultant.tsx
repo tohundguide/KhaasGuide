@@ -4,6 +4,125 @@ import { createChatSession, sendMessageToGemini } from '../services/geminiServic
 import { ChatMessage } from '../types';
 import { Chat } from "@google/genai";
 
+// Component to render formatted markdown-like text
+const FormattedMessage: React.FC<{ text: string; isUser: boolean }> = ({ text, isUser }) => {
+  const formatText = (content: string) => {
+    // Split by newlines to handle line breaks
+    const lines = content.split('\n');
+    
+    return lines.map((line, lineIndex) => {
+      // Check for bullet points
+      if (line.trim().startsWith('- ') || line.trim().startsWith('• ')) {
+        const bulletContent = line.trim().substring(2);
+        return (
+          <div key={lineIndex} className="flex gap-2 ml-2 my-1">
+            <span className="text-gold-500">•</span>
+            <span>{formatInlineText(bulletContent)}</span>
+          </div>
+        );
+      }
+      
+      // Check for numbered lists
+      const numberedMatch = line.trim().match(/^(\d+)\.\s(.+)/);
+      if (numberedMatch) {
+        return (
+          <div key={lineIndex} className="flex gap-2 ml-2 my-1">
+            <span className="text-gold-500 font-semibold">{numberedMatch[1]}.</span>
+            <span>{formatInlineText(numberedMatch[2])}</span>
+          </div>
+        );
+      }
+      
+      // Check for headers (##)
+      if (line.trim().startsWith('## ')) {
+        return (
+          <h4 key={lineIndex} className="font-bold text-corporate-900 mt-2 mb-1">
+            {line.trim().substring(3)}
+          </h4>
+        );
+      }
+      
+      // Check for headers (#)
+      if (line.trim().startsWith('# ')) {
+        return (
+          <h3 key={lineIndex} className="font-bold text-corporate-900 text-base mt-2 mb-1">
+            {line.trim().substring(2)}
+          </h3>
+        );
+      }
+      
+      // Empty line = paragraph break
+      if (line.trim() === '') {
+        return <div key={lineIndex} className="h-2" />;
+      }
+      
+      // Regular paragraph
+      return (
+        <p key={lineIndex} className="my-1">
+          {formatInlineText(line)}
+        </p>
+      );
+    });
+  };
+  
+  const formatInlineText = (text: string) => {
+    // Handle bold (**text** or __text__)
+    // Handle italic (*text* or _text_)
+    // Handle links [text](url)
+    const parts: (string | JSX.Element)[] = [];
+    let remaining = text;
+    let keyIndex = 0;
+    
+    while (remaining.length > 0) {
+      // Check for bold **text**
+      const boldMatch = remaining.match(/\*\*(.+?)\*\*/);
+      // Check for links [text](url)
+      const linkMatch = remaining.match(/\[(.+?)\]\((.+?)\)/);
+      
+      let firstMatch: { type: string; index: number; length: number; content: string; url?: string } | null = null;
+      
+      if (boldMatch && boldMatch.index !== undefined) {
+        if (!firstMatch || boldMatch.index < firstMatch.index) {
+          firstMatch = { type: 'bold', index: boldMatch.index, length: boldMatch[0].length, content: boldMatch[1] };
+        }
+      }
+      
+      if (linkMatch && linkMatch.index !== undefined) {
+        if (!firstMatch || linkMatch.index < firstMatch.index) {
+          firstMatch = { type: 'link', index: linkMatch.index, length: linkMatch[0].length, content: linkMatch[1], url: linkMatch[2] };
+        }
+      }
+      
+      if (firstMatch) {
+        // Add text before the match
+        if (firstMatch.index > 0) {
+          parts.push(remaining.substring(0, firstMatch.index));
+        }
+        
+        // Add the formatted element
+        if (firstMatch.type === 'bold') {
+          parts.push(<strong key={keyIndex++} className="font-semibold">{firstMatch.content}</strong>);
+        } else if (firstMatch.type === 'link') {
+          parts.push(
+            <a key={keyIndex++} href={firstMatch.url} target="_blank" rel="noopener noreferrer" className="text-corporate-600 underline hover:text-corporate-800">
+              {firstMatch.content}
+            </a>
+          );
+        }
+        
+        remaining = remaining.substring(firstMatch.index + firstMatch.length);
+      } else {
+        parts.push(remaining);
+        break;
+      }
+    }
+    
+    return <>{parts}</>;
+  };
+  
+  return <div className={isUser ? '' : 'prose-sm'}>{formatText(text)}</div>;
+};
+
 export const AiConsultant: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([
@@ -90,12 +209,12 @@ export const AiConsultant: React.FC = () => {
       <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
         {messages.map((msg) => (
           <div key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-            <div className={`max-w-[80%] rounded-2xl p-3 text-sm ${
+            <div className={`max-w-[85%] rounded-2xl p-3 text-sm ${
               msg.role === 'user' 
                 ? 'bg-corporate-600 text-white rounded-tr-none' 
                 : 'bg-white text-gray-800 shadow-sm border border-gray-100 rounded-tl-none'
             }`}>
-              {msg.text}
+              <FormattedMessage text={msg.text} isUser={msg.role === 'user'} />
             </div>
           </div>
         ))}
